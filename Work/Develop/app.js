@@ -17,7 +17,9 @@ const { getMaxListeners } = require("process");
 
 const employees = [];
 
-inquirer.prompt({
+
+function main(){
+    inquirer.prompt({
     type: "list",
     name: "role",
     message: "What position are you creating?",
@@ -52,17 +54,19 @@ inquirer.prompt({
             const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
             //const internJSON = JSON.stringify(intern);
             employees.push(intern);
+            setTimeout(main, 500)
+
             // fs.appendFile(`record.json`, internJSON, function(err) {
             //     if (err) {
             //         throw err;
             //     }
             // })
             console.log(intern);
-            fs.appendFile("main.html", render(employees), function(err) {
-                if (err) {
-                    throw err;
-                }
-            });
+            // fs.writeFile("main.html", render(employees), function(err) {
+            //     if (err) {
+            //         throw err;
+            //     }
+            // });
         });  
             break;
         case answers.role = "Engineer":
@@ -92,17 +96,18 @@ inquirer.prompt({
             const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
             //const engineerJSON = JSON.stringify(engineer);
             employees.push(engineer);
+            setTimeout(main, 500)
             // fs.appendFile(`record.json`, engineerJSON, function(err) {
             //     if (err) {
             //         throw err;
             //     }
             // })
             console.log(engineer);
-            fs.appendFile("main.html", render(employees), function(err) {
-                if (err) {
-                    throw err;
-                }
-            });
+            // fs.writeFile("main.html", render(employees), function(err) {
+            //     if (err) {
+            //         throw err;
+            //     }
+            // });
         });    
             break;
         case answers.role = "Manager":
@@ -132,21 +137,23 @@ inquirer.prompt({
             const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
             //const managerJSON = JSON.stringify(manager);
             employees.push(manager);
+            setTimeout(main, 500)
+
             // fs.appendFile(`record.json`, managerJSON, function(err) {
             //     if (err) {
             //         throw err;
             //     }
             // })
             console.log(manager);
-            fs.appendFile("main.html", render(employees), function(err) {
-                if (err) {
-                    throw err;
-                }
-            });
+            // fs.appendFile("main.html", render(employees), function(err) {
+            //     if (err) {
+            //         throw err;
+            //     }
+            // });
         });   
             break;
         case answers.role = "Render":
-            fs.appendFile("main.html", render(employees), function(err) {
+            fs.writeFile("main.html", render(employees), function(err) {
                 if (err) {
                     throw err;
                 }
@@ -156,10 +163,12 @@ inquirer.prompt({
             console.log(`broken`); 
     }
 });
+}
 
 
 
 
+main()
 
 
 // Write code to use inquirer to gather information about the development team members,
